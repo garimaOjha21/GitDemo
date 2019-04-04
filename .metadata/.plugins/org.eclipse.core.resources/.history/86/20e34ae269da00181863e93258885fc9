@@ -1,0 +1,26 @@
+package com.selenium.practice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoginFacebook {
+
+	public static void main(String[] args) 
+	{		
+				
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		String url = "https://www.facebook.com/";
+		
+		driver.get(url);
+		driver.findElement(By.id("email")).sendKeys("rimaupadhyaya06@gmail.com");
+		driver.findElement(By.id("pass")).sendKeys("Fbu414");
+		driver.findElement(By.linkText("Forgotten account?")).click();
+		
+		driver.close();
+		
+
+	}
+
+}

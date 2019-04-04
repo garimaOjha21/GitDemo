@@ -1,0 +1,30 @@
+package com.selenium.practice;
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+
+public class DagDropFrameExample {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://jqueryui.com/droppable/");
+		WebElement webframe = driver.findElement(By.cssSelector("//iframe[class = 'demo-frame']"));
+		driver.switchTo().frame(webframe);
+		Actions a = new Actions(driver);
+		WebElement source = driver.findElement(By.id("draggable"));
+		WebElement target = driver.findElement(By.id("droppable"));
+		a.dragAndDrop(source, target);
+		driver.switchTo().defaultContent();
+		Thread.sleep(10000);
+		driver.close();
+		
+	}
+
+}

@@ -1,0 +1,52 @@
+package com.selenium.prac;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class OpenBrowser {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.spicejet.com/");
+		Select s = new Select(driver.findElement(By.xpath("//select[@id='ctl00_mainContent_DropDownListCurrency']")));
+		s.selectByIndex(0);
+		Thread.sleep(10000);
+		s.selectByValue("AED");
+		Thread.sleep(10000);
+		s.selectByVisibleText("USD");
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("//div[@id='divpaxinfo']")).click();
+		for (int i=0;i<7 ; i++)
+		{
+			driver.findElement(By.xpath("//span[@id='hrefIncAdt']")).click();
+		}
+		System.out.println(driver.findElement(By.xpath("//span[@id='spanAudlt']")).getText());
+		for (int i=0;i<2 ; i++)
+		{
+			driver.findElement(By.xpath("//span[@id='hrefIncChd']")).click();
+		}
+		System.out.println(driver.findElement(By.xpath("//span[@id='spanChild']")).getText());
+		
+		for (int i=0;i<3 ; i++)
+		{
+			driver.findElement(By.xpath("//span[@id='hrefIncInf']")).click();
+		}
+		System.out.println(driver.findElement(By.xpath("//span[@id='spanInfant']")).getText());
+		
+		driver.findElement(By.xpath("//input[@id='btnclosepaxoption']")).click();
+		
+		
+		
+		driver.quit();
+		//driver.close();	
+		
+		
+	}
+
+}

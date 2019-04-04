@@ -1,0 +1,28 @@
+package com.selenium.practice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class CalenderClass {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.makemytrip.com/");
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//div[@class='inputM depart_input inputHlp inputDateFilter']")).click();
+		while(!driver.findElement(By.xpath("//div[@class='ui-datepicker-title']")).getText().contains("MARCH"))
+		{
+			driver.findElement(By.xpath("//a[@class='ui-datepicker-next ui-corner-all']/span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
+		}
+		
+		Thread.sleep(10000);
+		
+		
+		driver.quit();
+
+	}
+
+}

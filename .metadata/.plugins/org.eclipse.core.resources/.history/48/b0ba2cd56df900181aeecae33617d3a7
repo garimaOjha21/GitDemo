@@ -1,0 +1,37 @@
+package com.selenium.practice;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ExplicitWaitExample
+{
+	public static void main(String args[]) throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://alaskatrips.poweredbygps.com/g/pt/hotels?MDPCID=ALASKA-US.TPS.BRAND.hotels.HOTEL");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		driver.findElement(By.id("H-destination")).sendKeys("America");  // if send America 
+		driver.findElement(By.id("H-destination")).sendKeys(Keys.TAB);
+		driver.findElement(By.id("H-fromDate")).sendKeys(Keys.ENTER);
+		
+		WebDriverWait d = new WebDriverWait(driver , 15);
+		d.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[@class = 'flex-link'])[1]")));	
+		
+		driver.findElement(By.xpath("(//a[@class = 'flex-link'])[1]")).click(); 
+		System.out.println(driver.findElement(By.xpath("(//a[@class = 'flex-link'])[1]")).getAttribute("href"));
+		
+		/*Thread.sleep(5000);
+		driver.close();
+		driver.quit();  */
+		
+	}
+	"https://alaskatrips.poweredbygps.com/Miami-Beach-Hotels-W-South-Beach.h11881.Hotel-Information?chkin=12%2F6%2F2018&chkout=12%2F7%2F2018&rm1=a2&star=10%2C20%2C30%2C40%2C50&hwrqCacheKey=a9868fc6-ce1b-4275-b64a-d1f0e1950319HWRQ1544110737833&cancellable=false&regionId=201&vip=false&c=232f54fe-5019-40f5-b2f7-dfb83083e351&&exp_dp=5392&exp_ts=1544110741325&exp_curr=USD&swpToggleOn=false&exp_pg=HSR"
+}

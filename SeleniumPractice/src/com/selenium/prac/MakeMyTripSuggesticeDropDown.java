@@ -1,0 +1,32 @@
+package com.selenium.prac;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class MakeMyTripSuggesticeDropDown {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver","H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.makemytrip.com/");
+		WebElement from = 	driver.findElement(By.xpath("//input[@id='hp-widget__sfrom']"));
+		from.clear();
+		from.sendKeys("mum");
+		Thread.sleep(2000L);
+		from.sendKeys(Keys.ENTER);
+		WebElement to = 	driver.findElement(By.xpath("//input[@id='hp-widget__sTo']"));
+		to.clear();
+		to.sendKeys("pun");
+		Thread.sleep(2000L);
+		to.sendKeys(Keys.ENTER);
+		driver.findElement(By.cssSelector("td.ui-datepicker-week-end.ui-datepicker-days-cell-over.ui-datepicker-current-day.ui-datepicker-today")).click();
+		driver.findElement(By.xpath("//button[@id='searchBtn']")).click();
+		
+		driver.close();
+	}
+
+}

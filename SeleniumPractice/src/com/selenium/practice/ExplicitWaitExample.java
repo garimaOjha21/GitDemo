@@ -1,0 +1,35 @@
+package com.selenium.practice;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ExplicitWaitExample
+{
+	public static void main(String args[]) throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://alaskatrips.poweredbygps.com/g/pt/hotels?MDPCID=ALASKA-US.TPS.BRAND.hotels.HOTEL");
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		driver.findElement(By.id("H-destination")).sendKeys("America");  // if send America 
+		driver.findElement(By.id("H-destination")).sendKeys(Keys.TAB);
+		driver.findElement(By.id("H-fromDate")).sendKeys(Keys.ENTER);
+		
+		WebDriverWait d = new WebDriverWait(driver , 15);
+		d.until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[@class = 'flex-link'])[1]")));	
+		
+		driver.findElement(By.xpath("(//a[@class = 'flex-link'])[1]")).click(); 
+		System.out.println(driver.findElement(By.xpath("(//a[@class = 'flex-link'])[1]")).getAttribute("href"));
+		
+		Thread.sleep(5000);
+		driver.close();
+		driver.quit();	
+	}
+}

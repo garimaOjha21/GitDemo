@@ -1,0 +1,26 @@
+package com.selenium.practice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SiblingParent {
+
+	public static void main(String[] args)
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://www.qaclickacademy.com/interview.php");
+		driver.findElement(By.xpath("//li[text() = ' Selenium ']")).click();
+		driver.findElement(By.xpath("//li[@id='tablist1-tab2']/parent::ul")).click();
+		System.out.println(driver.findElement(By.xpath("//li[@id='tablist1-tab2']/following-sibling::li[1]")).getAttribute("id"));
+		System.out.println(driver.findElement(By.xpath("//li[@id='tablist1-tab2']/following-sibling::li[2]")).getAttribute("id"));
+		System.out.println(driver.findElement(By.xpath("//li[@id='tablist1-tab2']/parent::ul/li[1]")).getAttribute("id"));
+		driver.close();
+		
+		
+		
+
+	}
+
+}

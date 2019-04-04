@@ -1,0 +1,32 @@
+package com.selenium.practice;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Revision {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+	   System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+	   WebDriver driver = new ChromeDriver();
+	   driver.manage().window().maximize();
+	   driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	   driver.get("http://www.qaclickacademy.com/interview.php");
+	   int liCount = driver.findElements(By.xpath("//ul[@class='responsive-tabs__list']/li")).size();
+	   System.out.println("count"+liCount);
+	   for (int i= 1  ; i <= liCount ; i++)
+	   {
+		   driver.findElement(By.xpath("//ul[@class='responsive-tabs__list']/li["+i+"]")).click();
+		   Thread.sleep(10000);
+	   }
+	
+	   
+	   driver.close();
+	   
+	}
+
+}

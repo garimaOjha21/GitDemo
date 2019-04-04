@@ -1,0 +1,45 @@
+package com.selenium.practice;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Set;
+import java.util.Iterator;
+
+public class LinkCountExample
+{
+	public static void main(String args[])
+	{
+		System.setProperty("webdriver.chrome.driver", "H:\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://www.qaclickacademy.com/practice.php");
+		//total link in the page
+		System.out.println(driver.findElements(By.tagName("a")).size());
+		
+		//total link in the footer section
+		WebElement footersction = driver.findElement(By.id("gf-BIG"));
+		System.out.println("Total link in footer section is :" + footersction.findElements(By.tagName("a")).size());
+		
+		//total link in first column
+		WebElement columncount = driver.findElement(By.xpath("//div[@id= 'gf-BIG']/table/tbody/tr/td[1]"));
+		System.out.println("Total link in first column is :" + columncount.findElements(By.tagName("a")).size());
+		
+		//open all the column link in other tab
+		for (int i=1 ; i<columncount.findElements(By.tagName("a")).size() ; i++)
+		{
+			String keycombination = Keys.chord(Keys.CONTROL , Keys.ENTER);
+			columncount.findElements(By.tagName("a")).get(i).sendKeys(keycombination);			
+		}
+		Set<String> id = driver.getWindowHandles();
+		Iterator<String> it = id.iterator();
+		
+		while(it.hasNext())
+		{
+				System.out.println("Title :" + driver.switchTo().window(it.next()).getTitle() );
+		}
+		driver.quit();	
+	}
+}
